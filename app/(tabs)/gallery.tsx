@@ -95,7 +95,7 @@ export default function GalleryPage() {
         { key: 'low1', compress: 0.8, width: originalWidth * 0.4 },
         { key: 'low2', compress: 0.7, width: originalWidth * 0.4 },
         { key: 'low3', compress: 0.6, width: originalWidth * 0.4 },
-        { key: 'low4', compress: 0, width: originalWidth * 0.4 },
+        { key: 'low4', compress: 0.5, width: originalWidth * 0.4 },
       ];
 
       for (const quality of qualities) {
@@ -226,6 +226,10 @@ export default function GalleryPage() {
 
           // Navigate to gallery or show success message
           Alert.alert('Success', 'Photo saved successfully!', [
+            {
+                text: 'OK',
+                style: 'cancel',
+              }
           ]);
 
         } catch (error) {
@@ -281,7 +285,7 @@ export default function GalleryPage() {
                 maxScale={3}
                 panToMove={true}
                 pinchToZoom={true}
-            >i
+            >
                 <Image
                   source={getImageSource()}
                   style={{ width: getImageWidth(), height: getImageHeight() }}
@@ -471,7 +475,8 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 30,
   },
   actionButton: {
     flexDirection: 'row',

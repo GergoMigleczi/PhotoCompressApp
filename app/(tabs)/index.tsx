@@ -18,7 +18,7 @@ const { width, height } = Dimensions.get('window');
 export default function CameraPage() {
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
   const [cameraType, setCameraType] = useState('back');
-  const [flashMode, setFlashMode] = useState('off');
+  const [flashMode, setFlashMode] = useState('auto');
   const [isCapturing, setIsCapturing] = useState(false);
   const [mediaPermission, setMediaPermission] = useState(null);
   const [isCameraReady, setIsCameraReady] = useState(false);
@@ -128,11 +128,22 @@ export default function CameraPage() {
       case 'on':
         return 'flash';
       case 'auto':
-        return 'flash-auto';
+        return 'flash';
       default:
         return 'flash-off';
     }
   };
+
+  const getFlashIconColor = () => {
+      switch (flashMode) {
+        case 'on':
+          return 'yellow';
+        case 'auto':
+          return 'white';
+        default:
+          return 'white';
+      }
+    };
 
   if (!cameraPermission || !shouldShowCamera) {
     return (
@@ -172,7 +183,7 @@ export default function CameraPage() {
             style={styles.controlButton}
             onPress={toggleFlash}
           >
-            <Ionicons name={getFlashIcon()} size={30} color="white" />
+            <Ionicons name={getFlashIcon()} size={30} color={getFlashIconColor()} />
           </TouchableOpacity>
         </View>
 
